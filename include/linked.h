@@ -5,26 +5,35 @@
 #ifndef LINKED_H
 #define LINKED_H
 
-#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 
-class Node {
-public:
+// node structure
+typedef struct Node {
     int data;
-    Node* next;
-    Node(int data) : data(data), next(nullptr) {}
-};
+    struct Node *next;
+} Node;
 
-class LinkedList {
-private:
+// linked list structure
+typedef struct LinkedList {
     Node* head;
+} LinkedList;
 
-public:
-    LinkedList() : head(nullptr) {}
-    ~LinkedList();
-    void insertAtBegin(int data);
-    void insertAtEnd(int data);
-    void insertAtPosition(int data, int position);
-    void display();
-};
+// function prototypes
+LinkedList* createLinkedList();
+// destroy
+void destroyLinkedList(LinkedList* list);
+// insert
+void insertAtBegin(LinkedList* list, int data);
+void insertAtEnd(LinkedList* list, int data);
+void insertAtPosition(LinkedList* list, int data, int position);
+// get
+Node* getByPosition(LinkedList* list, int position);
+// remove
+void removeFirst(LinkedList *list);
+void removeLast(LinkedList* list);
+void removeByPosition(LinkedList *list, int position);
+// display
+void display(LinkedList* list);
 
-#endif // LINKED_H
+#endif 
