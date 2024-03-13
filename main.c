@@ -5,8 +5,6 @@
 
 //linked list
 void handleLinkedList(LinkedList* myList);
-
-
 void handleChoice();
 
 

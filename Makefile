@@ -41,4 +41,7 @@ $(OBJ_DIR) $(BIN_DIR):
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
 
-.PHONY: clean
+cleanall: clean
+	rm -f $(EXEC)
+
+.PHONY: all clean cleanall
