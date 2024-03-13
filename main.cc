@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib> // for exit()
-#include "../include/linked.h"
+#include "include/linked.h"
+
 
 void handleLinkedList(LinkedList &myList) {
     int insertChoice, data, position;
