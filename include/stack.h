@@ -3,29 +3,32 @@
 #ifndef STACK_H
 #define STACK_H
 
-#define MAX_SIZE 100
+#include <stdbool.h>
 
-typedef struct STACK {
-    int items[MAX_SIZE];
-    int top;
+
+// define the type of the data
+typedef int StackItem;
+
+// define the structure of the stack node
+typedef struct StackNode {
+    StackItem data;
+    struct StackNode *next;
+}StackNode;
+
+// define the structure of the stack
+typedef struct {
+    StackNode *top;
+    int size;
 }Stack;
 
-// function to initialize the stack
-void initializeStack(Stack *stack);
-
-// function to check if the stack is empty
-int isEmpty(Stack *stack);
-
-// function to check if the stack is full
-int isFull(Stack *stack);
-
-// function to push an element onto the stack
-void push(Stack *stack, int value);
-
-// function to pop an element from the stack
-int pop(Stack *stack);
-
-// function to peek at the top element of the stack
-int peek(Stack *stack);
+// Function prototypes
+Stack* createStack();
+void destroyStack(Stack* stack);
+bool isEmpty(Stack* stack);
+void push(Stack* stack, StackItem item);
+StackItem pop(Stack* stack);
+StackItem peek(Stack* stack);
+int getSize(Stack* stack);
+void displayStack(Stack *stack);
 
 #endif 

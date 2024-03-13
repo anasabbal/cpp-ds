@@ -1,35 +1,67 @@
-#include <stdio.h>
+#include <stdlib.h> // for malloc, free
 #include "../include/stack.h"
 
 
-void initializedStack(Stack *stack){
-    stack->top = -1;
+Stack* createStack(){
+    Stack *stack = (Stack*)malloc(sizeof(Stack));
+    if(stack == NULL){
+        exit(EXIT_FAILURE);
+    }
+    stack->top = NULL;
+    stack->size = 0;
+    return stack;
 }
-
-int isEmpty(Stack *stack){
-    return (stack->top == -1);
+void destroyStack(Stack* stack){
+    while (!isEmpty(stack)){
+        pop(stack);
+    }
+    free(stack);
 }
-
-// function to check if the stack is full
-int isFull(Stack *stack){
-    return (stack->top == MAX_SIZE - 1);
+bool isEmpty(Stack* stack){
+    return stack->top == NULL;
 }
-
-// function to push an element onto the stack
-void push(Stack *stack, int value){
-    if(isFull(stack)){
-        printf("Error: Stack overflow\n");
+void push(Stack* stack, StackItem item){
+    StackNode *newNode = (StackNode*)malloc(sizeof(StackNode));
+    if(newNode == NULL){
+        exit(EXIT_FAILURE);
+    }
+    newNode->data = item;
+    newNode->next = stack->top;
+    stack->top = newNode;
+    stack->size++;
+}
+StackItem pop(Stack* stack){
+    if(isEmpty(stack)){
+        printf("Error: Stack is empty.\n");
+        exit(EXIT_FAILURE);
+    }
+    StackNode *temp = stack->top;
+    StackItem item = temp->data;
+    stack->top = temp->next;
+    free(temp);
+    stack->size--;
+    return item;
+}
+StackItem peek(Stack* stack){
+    if(isEmpty(stack)){
+        printf("Error: Stack is empty.\n");
+        exit(EXIT_FAILURE);
+    }
+    return stack->top->data;
+}
+int getSize(Stack* stack){
+    return stack->size;
+}
+void displayStack(Stack *stack) {
+    if (isEmpty(stack)) {
+        printf("Stack is empty.\n");
         return;
     }
-    stack->items[++stack->top] = value;
-}
 
-// function to pop an element from the stack
-int pop(Stack *stack){
-    return 0;
-}
-
-// function to peek at the top element of the stack
-int peek(Stack *stack){
-    return 0;
+    printf("Stack contents (top to bottom):\n");
+    StackNode *current = stack->top;
+    while (current != NULL) {
+        printf("%f\n", current->data); // Change %f to %c for char
+        current = current->next;
+    }
 }
