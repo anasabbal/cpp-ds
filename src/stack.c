@@ -1,5 +1,7 @@
 #include <stdlib.h> // for malloc, free
 #include "../include/stack.h"
+#include <stdio.h>
+
 
 
 Stack* createStack(){
@@ -7,6 +9,8 @@ Stack* createStack(){
     if(stack == NULL){
         exit(EXIT_FAILURE);
     }
+    printf("Size of Stack: %lu\n", sizeof(Stack)); // print size of Stack
+    printf("Address of the Stack: %p\n", (void*)stack); // print address of the Stack
     stack->top = NULL;
     stack->size = 0;
     return stack;
@@ -61,7 +65,7 @@ void displayStack(Stack *stack) {
     printf("Stack contents (top to bottom):\n");
     StackNode *current = stack->top;
     while (current != NULL) {
-        printf("%f\n", current->data); // Change %f to %c for char
+        printf("%d\n", current->data); // Change %f to %c for char
         current = current->next;
     }
 }

@@ -31,8 +31,8 @@ void handleChoice(int choice) {
             break;
         }
         case 2:
-            Stack stack;
-            handleStack(&stack);
+            //Stack stack;
+            //handleStack(&stack);
             break;
         case 3:
             // Handle Queue
@@ -101,7 +101,7 @@ void handleLinkedList(LinkedList* myList) {
                 exit(EXIT_FAILURE);
         }
         printf("Updated Linked List:\n");
-        display(myList); // Display the linked list after each operation
+        //display(myList); // Display the linked list after each operation
 
         printf("Do you want to continue? (y/n): ");
         scanf(" %c", &exitKey);
@@ -124,14 +124,14 @@ void handleStack(Stack *stack){
         switch (stackChoice) {
             case 1:
                 printf("Enter item to push onto the stack: ");
-                scanf("%f", &item); // Change to %c for char or %f for float
+                scanf("%d", &item); // Change to %c for char or %f for float
                 push(stack, item);
                 printf("Item pushed onto the stack.\n");
                 break;
             case 2:
                 if (!isEmpty(stack)) {
                     item = pop(stack);
-                    printf("Popped item from the stack: %f\n", item); // Change %f to %c for char
+                    printf("Popped item from the stack: %d\n", item); // Change %f to %c for char
                 } else {
                     printf("Stack is empty. Cannot pop.\n");
                 }
@@ -139,7 +139,7 @@ void handleStack(Stack *stack){
             case 3:
                 if (!isEmpty(stack)) {
                     item = peek(stack);
-                    printf("Top item on the stack: %f\n", item); // Change %f to %c for char
+                    printf("Top item on the stack: %d\n", item); // Change %f to %c for char
                 } else {
                     printf("Stack is empty. No top item.\n");
                 }
@@ -147,7 +147,7 @@ void handleStack(Stack *stack){
             case 4:
                 if (!isEmpty(stack)) {
                     printf("Stack contents:\n");
-                    display(stack);
+                    //display(stack);
                 } else {
                     printf("Stack is empty.\n");
                 }
