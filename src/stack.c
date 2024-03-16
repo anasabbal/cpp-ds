@@ -1,71 +1,62 @@
 #include <stdlib.h> // for malloc, free
-#include "../include/stack.h"
 #include <stdio.h>
+#include "../include/stack.h"
 
 
 
-Stack* createStack(){
-    Stack *stack = (Stack*)malloc(sizeof(Stack));
-    if(stack == NULL){
+// Function to create a new stack
+Stack* createStack() {
+    Stack* stack = (Stack*)malloc(sizeof(Stack));
+    if (stack == NULL) {
+        printf("Memory allocation failed\n");
         exit(EXIT_FAILURE);
     }
-    printf("Size of Stack: %lu\n", sizeof(Stack)); // print size of Stack
-    printf("Address of the Stack: %p\n", (void*)stack); // print address of the Stack
-    stack->top = NULL;
-    stack->size = 0;
+    stack->top = NULL; // Initialize top to NULL indicating an empty stack
     return stack;
 }
-void destroyStack(Stack* stack){
-    while (!isEmpty(stack)){
-        pop(stack);
-    }
-    free(stack);
-}
-bool isEmpty(Stack* stack){
-    return stack->top == NULL;
-}
-void push(Stack* stack, StackItem item){
-    StackNode *newNode = (StackNode*)malloc(sizeof(StackNode));
-    if(newNode == NULL){
+
+// Function to create a new node with given data
+NodeStack* createNode(int value) {
+    NodeStack* newNode = (NodeStack*)malloc(sizeof(NodeStack));
+    if (newNode == NULL) {
+        printf("Memory allocation failed\n");
         exit(EXIT_FAILURE);
     }
-    newNode->data = item;
+    newNode->data = value;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Function to push an element onto the stack
+void push(Stack* stack, int value) {
+    NodeStack* newNode = createNode(value);
     newNode->next = stack->top;
     stack->top = newNode;
-    stack->size++;
 }
-StackItem pop(Stack* stack){
-    if(isEmpty(stack)){
-        printf("Error: Stack is empty.\n");
+
+// Function to pop the top element from the stack
+int pop(Stack* stack) {
+    if (isEmpty(stack)) {
+        printf("Stack Underflow\n");
         exit(EXIT_FAILURE);
     }
-    StackNode *temp = stack->top;
-    StackItem item = temp->data;
-    stack->top = temp->next;
+    NodeStack* temp = stack->top;
+    int poppedValue = temp->data;
+    stack->top = stack->top->next;
     free(temp);
-    stack->size--;
-    return item;
+    return poppedValue;
 }
-StackItem peek(Stack* stack){
-    if(isEmpty(stack)){
-        printf("Error: Stack is empty.\n");
+
+// Function to peek the top element of the stack without removing it
+int peek(Stack* stack) {
+    if (isEmpty(stack)) {
+        printf("Stack is empty\n");
         exit(EXIT_FAILURE);
     }
     return stack->top->data;
 }
-int getSize(Stack* stack){
-    return stack->size;
-}
-void displayStack(Stack *stack) {
-    if (isEmpty(stack)) {
-        printf("Stack is empty.\n");
-        return;
-    }
 
-    printf("Stack contents (top to bottom):\n");
-    StackNode *current = stack->top;
-    while (current != NULL) {
-        printf("%d\n", current->data); // Change %f to %c for char
-        current = current->next;
-    }
+// Function to check if the stack is empty
+int isEmpty(Stack* stack) {
+    return (stack->top == NULL);
 }

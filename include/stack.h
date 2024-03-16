@@ -1,34 +1,31 @@
-
-
 #ifndef STACK_H
 #define STACK_H
 
-#include <stdbool.h>
+// Node structure for stack elements
+typedef struct NodeStack {
+    int data;          // Data of the node
+    struct NodeStack* next; // Pointer to the next node
+} NodeStack;
 
 
-// define the type of the data
-typedef int StackItem;
-
-// define the structure of the stack node
-typedef struct StackNode {
-    StackItem data;
-    struct StackNode *next;
-}StackNode;
-
-// define the structure of the stack
+// Structure to represent a stack
 typedef struct {
-    StackNode *top;
-    int size;
-}Stack;
+    NodeStack* top; // Pointer to the top of the stack
+} Stack;
 
-// Function prototypes
+// Function to create a new stack
 Stack* createStack();
-void destroyStack(Stack* stack);
-bool isEmpty(Stack* stack);
-void push(Stack* stack, StackItem item);
-StackItem pop(Stack* stack);
-StackItem peek(Stack* stack);
-int getSize(Stack* stack);
-void displayStack(Stack *stack);
 
-#endif 
+// Function to push an element onto the stack
+void push(Stack* stack, int value);
+
+// Function to pop the top element from the stack
+int pop(Stack* stack);
+
+// Function to peek the top element of the stack without removing it
+int peek(Stack* stack);
+
+// Function to check if the stack is empty
+int isEmpty(Stack* stack);
+
+#endif /* STACK_H */

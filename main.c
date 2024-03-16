@@ -31,8 +31,8 @@ void handleChoice(int choice) {
             break;
         }
         case 2:
-            //Stack stack;
-            //handleStack(&stack);
+            /*Stack* stack = createStack();
+            free(stack);*/
             break;
         case 3:
             // Handle Queue
@@ -104,62 +104,6 @@ void handleLinkedList(LinkedList* myList) {
         //display(myList); // Display the linked list after each operation
 
         printf("Do you want to continue? (y/n): ");
-        scanf(" %c", &exitKey);
-    } while (exitKey == 'y' || exitKey == 'Y');
-}
-void handleStack(Stack *stack){
-    int stackChoice;
-    char exitKey;
-    StackItem item;
-
-    do {
-        printf("\nStack operations:\n");
-        printf("1. Push\n");
-        printf("2. Pop\n");
-        printf("3. Peek\n");
-        printf("4. Display\n");
-        printf("Enter your choice (1/2/3/4): ");
-        scanf("%d", &stackChoice);
-
-        switch (stackChoice) {
-            case 1:
-                printf("Enter item to push onto the stack: ");
-                scanf("%d", &item); // Change to %c for char or %f for float
-                push(stack, item);
-                printf("Item pushed onto the stack.\n");
-                break;
-            case 2:
-                if (!isEmpty(stack)) {
-                    item = pop(stack);
-                    printf("Popped item from the stack: %d\n", item); // Change %f to %c for char
-                } else {
-                    printf("Stack is empty. Cannot pop.\n");
-                }
-                break;
-            case 3:
-                if (!isEmpty(stack)) {
-                    item = peek(stack);
-                    printf("Top item on the stack: %d\n", item); // Change %f to %c for char
-                } else {
-                    printf("Stack is empty. No top item.\n");
-                }
-                break;
-            case 4:
-                if (!isEmpty(stack)) {
-                    printf("Stack contents:\n");
-                    //display(stack);
-                } else {
-                    printf("Stack is empty.\n");
-                }
-                break;
-            default:
-                fprintf(stderr, "Invalid choice.\n");
-                exit(EXIT_FAILURE);
-        }
-        printf("Updated Stack\n");
-        displayStack(stack);
-
-        printf("Do you want to continue with stack operations? (y/n): ");
         scanf(" %c", &exitKey);
     } while (exitKey == 'y' || exitKey == 'Y');
 }
